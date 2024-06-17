@@ -1,0 +1,154 @@
+{
+    "namespace": "myApp",
+    "entities": [
+        {
+            "name": "Employees",
+            "label": "Employee",
+            "associations": [
+                {
+                    "name": "Performance",
+                    "target": "Performance",
+                    "multiplicity": "many",
+                    "backAssociation": "employee",
+                    "selfContained": false
+                }
+            ],
+            "labelPlural": "Employees",
+            "elements": [
+                {
+                    "name": "ID",
+                    "type": "UUID",
+                    "key": true,
+                    "label": ""
+                },
+                {
+                    "name": "employeesID",
+                    "type": "String(50)",
+                    "label": "Id",
+                    "additionalInfo": "Unique identifier for each employee",
+                    "essentialElement": true,
+                    "semanticKey": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                },
+                {
+                    "name": "firstName",
+                    "type": "String(50)",
+                    "label": "First Name",
+                    "additionalInfo": "First name of the employee",
+                    "essentialElement": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                },
+                {
+                    "name": "lastName",
+                    "type": "String(50)",
+                    "label": "Last Name",
+                    "additionalInfo": "Last name of the employee",
+                    "essentialElement": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                },
+                {
+                    "name": "age",
+                    "type": "Integer",
+                    "label": "Age",
+                    "additionalInfo": "Age of the employee",
+                    "essentialElement": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                },
+                {
+                    "name": "position",
+                    "type": "String(50)",
+                    "label": "Position",
+                    "additionalInfo": "Position of the employee",
+                    "essentialElement": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                }
+            ]
+        },
+        {
+            "name": "Performance",
+            "label": "Performance",
+            "associations": [
+                {
+                    "name": "employee",
+                    "target": "Employees",
+                    "multiplicity": "one"
+                }
+            ],
+            "labelPlural": "Performances",
+            "elements": [
+                {
+                    "name": "ID",
+                    "type": "UUID",
+                    "key": true,
+                    "label": ""
+                },
+                {
+                    "name": "performanceID",
+                    "type": "String(50)",
+                    "label": "Id",
+                    "additionalInfo": "Unique identifier for each performance record",
+                    "essentialElement": true,
+                    "semanticKey": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                },
+                {
+                    "name": "rating",
+                    "type": "Decimal",
+                    "label": "Rating",
+                    "additionalInfo": "Performance rating of the employee",
+                    "essentialElement": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                },
+                {
+                    "name": "comments",
+                    "type": "String",
+                    "label": "Comments",
+                    "additionalInfo": "Comments on the employee's performance",
+                    "essentialElement": true,
+                    "values": [],
+                    "hasFixedValuesList": false
+                }
+            ]
+        }
+    ],
+    "service": {
+        "name": "myAppSrv",
+        "path": "srv/service.cds"
+    },
+    "applications": [
+        {
+            "name": "EmployeeManagementApp",
+            "pages": [
+                {
+                    "type": "ListReport",
+                    "entityType": "Employees",
+                    "listReportContent": {
+                        "filters": [],
+                        "loadDataOnAppLaunch": "Enabled",
+                        "tables": [
+                            {
+                                "title": "Employees",
+                                "id": "employeesTable",
+                                "baseEntityType": "Employees",
+                                "columns": [
+                                    "employeesID",
+                                    "firstName",
+                                    "lastName",
+                                    "age",
+                                    "position"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
